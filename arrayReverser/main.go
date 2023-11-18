@@ -22,16 +22,22 @@ func main() {
 	var numbers [10]int
 
 	for i := 0; i < len(numbers); i++ {
-		reader := bufio.NewReader(os.Stdin)
-		input, _ := reader.ReadString('\n')
-		input = strings.TrimSpace(input)
+		var tmp int
+		for {
+			reader := bufio.NewReader(os.Stdin)
+			input, _ := reader.ReadString('\n')
+			input = strings.TrimSpace(input)
 
-		n, err := strconv.Atoi(input)
-		if err != nil {
-			fmt.Println("Ошибка: введите корректное целое число.")
-			continue
+			var err error
+			tmp, err = strconv.Atoi(input)
+			if err != nil {
+				fmt.Println("Ошибка: введите корректное целое число.")
+				continue
+			} else {
+				break
+			}
 		}
-		numbers[i] = n
+		numbers[i] = tmp
 	}
 
 	result := reverser(numbers)
